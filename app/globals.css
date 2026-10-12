@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+/* =========================================
+   1. GLOBAL RESET & BASE
+========================================= */
+* { margin: 0; padding: 0; box-sizing: border-box; } /* 🌟 FIX: হাইফেন (-) এর বদলে স্টার (*) হবে */
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #050505;
+    color: #a1a1aa;
+    line-height: 1.7; 
+    overflow-x: hidden;
+    padding-top: 75px; 
+}
+a { text-decoration: none; color: inherit; transition: 0.3s ease; }
+.hover-green:hover { color: #00A859 !important; }
+
+.container { max-width: 1200px; margin: 0 auto; width: 90%; }
+section { padding: 100px 0; position: relative; }
+
+/* Backgrounds */
+.bg-dark { background-color: #050505; }
+.bg-subtle { background-color: #0a0a0c; border-top: 1px solid rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.03); }
+
+/* =========================================
+   2. GLOBAL TYPOGRAPHY (STRICT CONSISTENCY)
+========================================= */
+h1, h2, h3, h4, h5, h6 { 
+    color: #fafafa; 
+    letter-spacing: -0.03em; 
+    font-weight: 700;
+}
+
+/* Page Hero Headings (H1) */
+h1, .hero h1 { 
+    font-size: 3.5rem !important; 
+    line-height: 1.2 !important; 
+    margin-bottom: 25px !important; 
+    font-weight: 800;
+}
+
+/* Separated generic H2 and .section-title for correct alignment */
+h2, .section-title { 
+    font-size: 2.5rem !important; 
+    line-height: 1.25 !important; 
+    margin-bottom: 25px !important; 
+}
+.section-title {
+    text-align: center !important; 
+}
+
+/* Card Headings (Strict size for all cards across all pages) */
+.glass-card h2, 
+.glass-card h3, 
+.portfolio-card h3,
+.timeline-title { 
+    font-size: 1.5rem !important; 
+    line-height: 1.3 !important; 
+    margin-bottom: 15px !important;
+}
+
+/* Section Subtitles (Small Green Text) */
+.section-subtitle { 
+    color: #00A859; 
+    font-size: 0.9rem !important; 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    margin-bottom: 15px !important; 
+    font-weight: 700; 
+}
+
+/* Gradient & Green Text */
+.text-green { color: #00A859; }
+.text-gradient {
+    background: linear-gradient(135deg, #00A859 0%, #00d2ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* =========================================
+   3. COMPONENTS (CARDS, BUTTONS, NAV)
+========================================= */
+/* Hero Glow Effect */
+.hero { padding: 90px 0 80px; position: relative; }
+.hero-glow {
+    position: absolute; top: -20%; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 500px;
+    background: radial-gradient(ellipse at center, rgba(0, 168, 89, 0.15) 0%, transparent 70%);
+    filter: blur(60px); z-index: 0; pointer-events: none;
+}
+.hero-content { position: relative; z-index: 1; }
+
+/* Buttons */
+.btn-group { display: flex; gap: 15px; flex-wrap: wrap; }
+.btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    background: linear-gradient(135deg, #00A859 0%, #008C4A 100%); color: #ffffff !important;
+    padding: 14px 32px; border-radius: 6px; font-weight: 600; font-size: 1rem;
+    transition: all 0.3s ease; border: 1px solid rgba(0, 168, 89, 0.5); cursor: pointer;
+    box-shadow: 0 10px 25px -5px rgba(0, 168, 89, 0.3);
+}
+.btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px -5px rgba(0, 168, 89, 0.5); }
+.btn-dark { background: rgba(255, 255, 255, 0.03); color: #fafafa !important; border-color: rgba(255, 255, 255, 0.1); box-shadow: none; backdrop-filter: blur(10px); }
+.btn-dark:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.2); }
+
+/* Navigation */
+nav { 
+    padding: 15px 0; 
+    background: rgba(5, 5, 5, 0.85); 
+    backdrop-filter: blur(20px); 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+    position: fixed; 
+    top: 0; 
+    left: 0;
+    width: 100%;
+    z-index: 1000; 
+}
+.nav-container { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 1.5rem; font-weight: 800; color: #fff; letter-spacing: -1px; }
+.nav-links { display: flex; gap: 35px; }
+.nav-links a { font-size: 0.95rem; font-weight: 500; color: #a1a1aa; }
+.nav-links a:hover { color: #fafafa; }
+
+/* Grid Layouts */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+
+/* Glass Cards */
+.glass-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); border-top: 1px solid rgba(255, 255, 255, 0.08); padding: 40px; border-radius: 12px; transition: all 0.4s ease; }
+.glass-card:hover { transform: translateY(-8px); background: rgba(255, 255, 255, 0.03); border-color: rgba(0, 168, 89, 0.3); box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(0, 168, 89, 0.1); }
+.glass-card p { font-size: 1.05rem !important; color: #8b949e !important; line-height: 1.7 !important; }
+
+/* Portfolio Cards */
+.portfolio-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); padding: 0 !important; border-radius: 12px; overflow: hidden; transition: 0.4s ease; }
+.portfolio-card:hover { transform: translateY(-8px); border-color: rgba(0, 168, 89, 0.5); }
+.portfolio-img { width: 100%; height: 240px; background: #111; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+
+/* Icons & Badges */
+.icon-circle { width: 60px; height: 60px; background: rgba(0, 168, 89, 0.1); color: #00A859; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 25px; border: 1px solid rgba(0, 168, 89, 0.2); }
+.tech-pill { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 8px 16px; border-radius: 50px; font-weight: 600; color: #e4e4e7; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; }
+.tech-pill:hover { background: rgba(0,168,89,0.1); border-color: #00A859; color: #fff; }
+
+/* Timeline */
+.timeline { border-left: 2px solid rgba(0, 168, 89, 0.2); padding-left: 30px; margin-left: 10px; position: relative; }
+.timeline-item { position: relative; margin-bottom: 40px; }
+.timeline-item:last-child { margin-bottom: 0; }
+.timeline-item::before { content: ''; position: absolute; left: -39px; top: 0; width: 16px; height: 16px; border-radius: 50%; background: #00A859; border: 3px solid #050505; }
+.timeline-date { color: #00A859; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: inline-block; background: rgba(0,168,89,0.1); padding: 4px 10px; border-radius: 4px; }
+
+/* Form Elements */
+.contact-form input, .contact-form textarea { width: 100%; padding: 16px; margin-bottom: 20px; border-radius: 8px; font-family: inherit; font-size: 1rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); color: #fff; transition: 0.3s; }
+.contact-form input:focus, .contact-form textarea:focus { background: rgba(255, 255, 255, 0.05); outline: none; border-color: #00A859; box-shadow: 0 0 0 3px rgba(0,168,89,0.15); }
+
+
+/* =========================================
+   4. STRICT MOBILE RESPONSIVENESS
+========================================= */
+@media (max-width: 992px) {
+    .grid-2 { grid-template-columns: 1fr; gap: 40px; }
+    h1, .hero h1 { font-size: 3rem !important; }
+}
+
+@media (max-width: 768px) {
+    section { padding: 60px 0; }
+    .hero { padding: 50px 0 50px; text-align: center; } 
+    .hero-glow { width: 100%; height: 300px; }
+    
+    /* STRICT MOBILE TYPOGRAPHY */
+    h1, .hero h1 { font-size: 2.2rem !important; line-height: 1.25 !important; margin-bottom: 15px !important; }
+    h2, .section-title { font-size: 1.8rem !important; line-height: 1.3 !important; margin-bottom: 15px !important; }
+    
+    /* Strict Mobile Card Headings */
+    .glass-card h2, 
+    .glass-card h3, 
+    .portfolio-card h3,
+    .timeline-title { font-size: 1.25rem !important; line-height: 1.35 !important; margin-bottom: 10px !important; }
+    
+    /* Strict Mobile Paragraphs */
+    p { font-size: 0.95rem !important; line-height: 1.6 !important; }
+    .glass-card p { font-size: 0.9rem !important; }
+
+    /* Layout Fixes */
+    .btn-group { flex-direction: column; width: 100%; gap: 12px; }
+    .btn-group .btn { width: 100%; justify-content: center; }
+    .nav-links { display: none; }
+    .grid-3 { grid-template-columns: 1fr; }
+    
+    /* Unified Mobile Card Paddings */
+    .glass-card { padding: 25px 20px !important; }
+    .hero .glass-card { text-align: left; }
+    
+    /* Stats Layout */
+    div[style*="grid-template-columns: repeat(4"] { grid-template-columns: 1fr 1fr !important; gap: 15px !important; }
+}
+
+/* =========================================
+   5. MODAL / POPUP STYLES
+========================================= */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 9999; padding: 20px;
+}
+.modal-content {
+    background: #0a0a0c; border: 1px solid rgba(0, 168, 89, 0.3);
+    padding: 40px; border-radius: 12px; width: 100%; max-width: 500px;
+    position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    animation: modalFadeUp 0.4s ease forwards;
+}
+
+@keyframes modalFadeUp { 
+    from { opacity: 0; transform: translateY(30px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+
+.close-btn {
+    position: absolute; top: 15px; right: 20px;
+    background: none; border: none; color: #a1a1aa;
+    font-size: 1.5rem; cursor: pointer; transition: 0.3s;
+}
+.close-btn:hover { color: #ff5f56; transform: scale(1.1); }
+
+/* =========================================
+   6. SCROLL ANIMATIONS (Scroll Reveal)
+========================================= */
+.animate-fade-up { 
+    opacity: 0; 
+    transform: translateY(40px); 
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); 
+}
+.animate-fade-up.in-view { 
+    opacity: 1; 
+    transform: translateY(0); 
+}
+.delay-1 { transition-delay: 0.2s; } 
+.delay-2 { transition-delay: 0.4s; }

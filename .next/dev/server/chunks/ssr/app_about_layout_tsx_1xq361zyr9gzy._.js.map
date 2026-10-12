@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/USER/Downloads/habibur-portfolio-nextjs/app/about/layout.tsx"],"sourcesContent":["import type { Metadata } from \"next\";\r\n\r\nexport const metadata: Metadata = {\r\n  title: \"About Digital Habibur | Best Web Developer in Nabadwip\",\r\n  description: \"Learn more about Habibur Rahaman (Digital Habibur), a top-rated custom WordPress, Next.js, and web application developer based in Nabadwip, West Bengal.\",\r\n  keywords: [\"Habibur Rahaman\", \"Digital Habibur\", \"Web Developer in Nabadwip\", \"WordPress Expert Nadia\", \"PHP Developer\", \"Full-Stack Developer India\"]\r\n};\r\n\r\nexport default function AboutLayout({\r\n  children,\r\n}: {\r\n  children: React.ReactNode;\r\n}) {\r\n  return <>{children}</>;\r\n}"],"names":["metadata","title","description","keywords","AboutLayout","children"],"mappings":";;;;;;;;AAEO,MAAMA,WAAqB;IAChCC,OAAO;IACPC,aAAa;IACbC,UAAU;QAAC;QAAmB;QAAmB;QAA6B;QAA0B;QAAiB;KAA6B;AACxJ;AAEe,SAASC,YAAY,EAClCC,QAAQ,EAGT;IACC,qBAAO;kBAAGA;;;;;;AACZ"}}]
+}
