@@ -1,5 +1,35 @@
+"use client";
+
 import React from 'react';
 import Link from 'next/link';
+
+// SEO Optimized Portfolio Data
+const portfolioData = [
+  {
+    id: "umrah-travel-erp",
+    category: "Enterprise ERP",
+    title: "Umrah Travel Management System",
+    description: "Engineered a robust custom plugin featuring automated wallet ledgers, secure KYC controls, and agent booking logs.",
+    tech: ["Custom PHP", "WordPress"],
+    image: "/portfolio-1.webp"
+  },
+  {
+    id: "automated-subscription-sync",
+    category: "Automation",
+    title: "Automated Subscription Sync",
+    description: "Developed a custom script ensuring real-time, secure data routing directly into Google Sheets and CRM pipelines.",
+    tech: ["API", "Google Apps Script"],
+    image: "/portfolio-2.webp"
+  },
+  {
+    id: "snc-udyog-portal",
+    category: "Web App",
+    title: "SNC UDYOG Portal",
+    description: "Complete enterprise website development including cloudflare configuration, automated backups, and handover documentation.",
+    tech: ["React", "Cloudflare"],
+    image: "/portfolio-3.webp"
+  }
+];
 
 export default function PortfolioPage() {
   return (
@@ -31,57 +61,30 @@ export default function PortfolioPage() {
           </div>
 
           <div className="grid-3">
-            {/* Project 1: Umrah ERP */}
-            <div className="portfolio-card animate-fade-up">
-              <div className="portfolio-img" style={{ overflow: 'hidden' }}>
-                  <img src="/portfolio-1.webp" alt="Umrah ERP" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              </div>
-              <div style={{ padding: '35px' }}>
-                <span style={{ display: 'inline-block', color: '#00A859', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '15px', background: 'rgba(0,168,89,0.1)', padding: '4px 10px', borderRadius: '4px' }}>Enterprise ERP</span>
-                <h3>Umrah Travel Management System</h3>
-                <p style={{ marginBottom: '25px' }}>Engineered a robust custom plugin featuring automated wallet ledgers, secure KYC controls, and agent booking logs.</p>
-                <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '25px' }}>
-                  <span className="tech-pill" style={{ padding: '4px 10px', fontSize: '0.75rem' }}>Custom PHP</span>
-                  <span className="tech-pill" style={{ padding: '4px 10px', fontSize: '0.75rem' }}>WordPress</span>
+            {portfolioData.map((project, index) => (
+              <div key={project.id} className={`portfolio-card animate-fade-up delay-${index}`}>
+                <div className="portfolio-img" style={{ overflow: 'hidden' }}>
+                    <img src={project.image} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
-                <a href="#" style={{ color: '#fff', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>View Case Study <i className="fa-solid fa-arrow-right text-green"></i></a>
-              </div>
-            </div>
-
-            {/* Project 2: Automation */}
-            <div className="portfolio-card animate-fade-up delay-1">
-              <div className="portfolio-img" style={{ overflow: 'hidden' }}>
-                  <img src="/portfolio-2.webp" alt="Automation" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              </div>
-              <div style={{ padding: '35px' }}>
-                <span style={{ display: 'inline-block', color: '#00A859', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '15px', background: 'rgba(0,168,89,0.1)', padding: '4px 10px', borderRadius: '4px' }}>Automation</span>
-                <h3>Automated Subscription Sync</h3>
-                <p style={{ marginBottom: '25px' }}>Developed a custom script ensuring real-time, secure data routing directly into Google Sheets and CRM pipelines.</p>
-                <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '25px' }}>
-                  <span className="tech-pill" style={{ padding: '4px 10px', fontSize: '0.75rem' }}>API</span>
-                  <span className="tech-pill" style={{ padding: '4px 10px', fontSize: '0.75rem' }}>Google Apps Script</span>
+                <div style={{ padding: '35px' }}>
+                  <span style={{ display: 'inline-block', color: '#00A859', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '15px', background: 'rgba(0,168,89,0.1)', padding: '4px 10px', borderRadius: '4px' }}>
+                    {project.category}
+                  </span>
+                  <h3>{project.title}</h3>
+                  <p style={{ marginBottom: '25px' }}>{project.description}</p>
+                  <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '25px' }}>
+                    {project.tech.map((t, i) => (
+                      <span key={i} className="tech-pill" style={{ padding: '4px 10px', fontSize: '0.75rem' }}>{t}</span>
+                    ))}
+                  </div>
+                  
+                  {/* 🌟 FIX: Safe Link implementation using string concatenation */}
+                  <Link href={"/portfolio/" + project.id} style={{ color: '#fff', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }} className="hover-green">
+                    View Case Study <i className="fa-solid fa-arrow-right text-green"></i>
+                  </Link>
                 </div>
-                <a href="#" style={{ color: '#fff', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>View Case Study <i className="fa-solid fa-arrow-right text-green"></i></a>
               </div>
-            </div>
-
-            {/* Project 3: SNC Udyog */}
-            <div className="portfolio-card animate-fade-up delay-2">
-              <div className="portfolio-img" style={{ overflow: 'hidden' }}>
-                  <img src="/portfolio-3.webp" alt="SNC Udyog" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              </div>
-              <div style={{ padding: '35px' }}>
-                <span style={{ display: 'inline-block', color: '#00A859', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '15px', background: 'rgba(0,168,89,0.1)', padding: '4px 10px', borderRadius: '4px' }}>Web App</span>
-                <h3>SNC UDYOG Portal</h3>
-                <p style={{ marginBottom: '25px' }}>Complete enterprise website development including cloudflare configuration, automated backups, and handover documentation.</p>
-                <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '25px' }}>
-                  <span className="tech-pill" style={{ padding: '4px 10px', fontSize: '0.75rem' }}>React</span>
-                  <span className="tech-pill" style={{ padding: '4px 10px', fontSize: '0.75rem' }}>Cloudflare</span>
-                </div>
-                <a href="#" style={{ color: '#fff', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>View Case Study <i className="fa-solid fa-arrow-right text-green"></i></a>
-              </div>
-            </div>
-            
+            ))}
           </div>
         </div>
       </section>

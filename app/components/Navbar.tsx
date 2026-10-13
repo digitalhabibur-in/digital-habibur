@@ -10,15 +10,13 @@ export default function Navbar() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
-  // 🌟 FIX: Prevent Background Scrolling when Menu or Modal is open
+  // Prevent Background Scrolling when Menu or Modal is open
   useEffect(() => {
     if (isMobileMenuOpen || isModalOpen) {
-      document.body.style.overflow = 'hidden'; // Lock background scroll
+      document.body.style.overflow = 'hidden'; 
     } else {
-      document.body.style.overflow = ''; // Restore background scroll
+      document.body.style.overflow = ''; 
     }
-    
-    // Cleanup function when component unmounts
     return () => {
       document.body.style.overflow = '';
     };
@@ -69,14 +67,13 @@ export default function Navbar() {
         }
         .sidebar-overlay.active { opacity: 1; visibility: visible; }
         
-        /* 🌟 FIX: Full-screen centered menu */
         .sidebar-menu {
             position: fixed; top: 0; right: -100%; 
-            width: 100%; max-width: 100%; /* 100% width instead of 320px */
+            width: 100%; max-width: 100%; 
             height: 100dvh;
             background: #0a0a0c; 
             z-index: 1000; padding: 60px 20px; 
-            display: flex; flex-direction: column; align-items: center; /* Centered completely */
+            display: flex; flex-direction: column; align-items: center; 
             transition: 0.4s cubic-bezier(0.8, 0, 0.2, 1);
             overflow-y: auto;
         }
@@ -102,10 +99,33 @@ export default function Navbar() {
       `}} />
 
       <nav>
-        <div className="container nav-container">
-          <div className="logo">
-            <Link href="/">
-              <i className="fa-solid fa-layer-group text-green" style={{marginRight: '8px'}}></i>Habibur<span className="text-green">.</span>
+        <div className="container nav-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          
+          <div className="logo" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}>
+              
+              {/* 🌟 FIX: Updated SVG Logo (React CamelCase format) */}
+              <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: 'drop-shadow(0 0 10px rgba(0, 168, 89, 0.4))' }}>
+                <defs>
+                  <linearGradient id="neonGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#00A859" />
+                    <stop offset="100%" stopColor="#00d2ff" />
+                  </linearGradient>
+                </defs>
+                <polygon points="15,85 40,15 65,15 40,85" fill="url(#neonGradient)" opacity="0.9"/>
+                <polygon points="55,85 80,15 100,15 75,85" fill="url(#neonGradient)" opacity="0.6"/>
+                <polygon points="25,60 90,30 95,45 30,75" fill="url(#neonGradient)" />
+              </svg>
+
+              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <span style={{ fontSize: '1.3rem', fontWeight: 900, color: '#ffffff', letterSpacing: '1px', lineHeight: '1.2' }}>
+                  DIGITAL <span style={{ color: '#00A859' }}>HABIBUR</span>
+                </span>
+                <span style={{ fontSize: '0.65rem', color: '#8b949e', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '2.5px', marginTop: '2px' }}>
+                  We Build Your Success
+                </span>
+              </div>
+
             </Link>
           </div>
 
@@ -128,15 +148,16 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Sidebar Overlay */}
-      <div className={`sidebar-overlay ${isMobileMenuOpen ? 'active' : ''}`} onClick={() => setIsMobileMenuOpen(false)}></div>
+      <div className={`sidebar-overlay \${isMobileMenuOpen ? 'active' : ''}`} onClick={() => setIsMobileMenuOpen(false)}></div>
       
-      {/* Mobile Slide-out Menu (Now Full Screen) */}
-      <div className={`sidebar-menu ${isMobileMenuOpen ? 'active' : ''}`}>
+      {/* Mobile Slide-out Menu (Full Screen) */}
+      <div className={`sidebar-menu \${isMobileMenuOpen ? 'active' : ''}`}>
         
         <button onClick={() => setIsMobileMenuOpen(false)} style={{ position: 'absolute', top: '20px', right: '25px', background: 'none', border: 'none', color: '#a1a1aa', fontSize: '2rem', cursor: 'pointer' }}>
           <i className="fa-solid fa-xmark"></i>
         </button>
 
+        {/* Original Profile Image in Mobile Menu */}
         <div style={{ textAlign: 'center', marginBottom: '30px', marginTop: '20px' }}>
           <div style={{ width: '100px', height: '100px', borderRadius: '50%', border: '2px solid #00A859', padding: '3px', margin: '0 auto 15px', overflow: 'hidden' }}>
             <img src="/about-1.webp" alt="Habibur Rahaman" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />

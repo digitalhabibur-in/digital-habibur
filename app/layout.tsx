@@ -7,6 +7,11 @@ import ScrollObserver from "./components/ScrollObserver"; // 🌟 স্ক্�
 export const metadata: Metadata = {
   title: "Habibur Rahaman | Custom Web & Software Developer",
   description: "Professional Portfolio of Habibur Rahaman",
+  icons: {
+    icon: '/icon.png',
+    shortcut: '/icon.png',
+    apple: '/icon.png',
+  },
 };
 
 export default function RootLayout({
@@ -40,7 +45,7 @@ export default function RootLayout({
               <Link href="/terms-conditions" style={{ color: '#8b949e', fontSize: '0.9rem', fontWeight: 500 }} className="hover-green">Terms & Conditions</Link>
             </div>
             
-            <p style={{ color: '#666', fontSize: '0.9rem', margin: 0 }}>&copy; 2026 Habibur Rahaman. Crafted for Business Growth.</p>
+            <p style={{ color: '#666', fontSize: '0.9rem', margin: 0 }}>&copy; 2026 Habibur Rahaman.</p>
           </div>
         </footer>
 
