@@ -43,7 +43,7 @@ export default function Home() {
       if (response.ok) {
         setIsSuccess(true);
         form.reset();
-        // ৩ সেকেন্ড পর পপআপ অটোমেটিক বন্ধ হয়ে যাবে
+        // ৩ সেকেন্ড পর পপআপ অটোমেটিক বন্ধ হয়ে যাবে
         if(isModalOpen) {
           setTimeout(() => {
             closeModal();
@@ -61,7 +61,7 @@ export default function Home() {
   };
 
   return (
-    <main>
+    <main style={{ overflowX: 'hidden' }}>
       <style dangerouslySetInnerHTML={{ __html: `
         .responsive-img-box { height: 400px; padding: 0; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; display: flex; justify-content: center; align-items: center; }
         .growth-img-box { height: 500px; padding: 0; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; display: flex; justify-content: center; align-items: center; }
@@ -153,7 +153,8 @@ export default function Home() {
               </div>
             </div>
             
-            <div className="glass-card" style={{ padding: '20px', background: 'rgba(10,10,12,0.8)' }}>
+            {/* 🌟 FIX: Added width: '100%' and overflow: 'hidden' to strictly contain the pre block */}
+            <div className="glass-card" style={{ padding: '20px', background: 'rgba(10,10,12,0.8)', width: '100%', overflow: 'hidden' }}>
               <div style={{ display: 'flex', gap: '8px', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '15px', marginBottom: '15px' }}>
                 <div style={{width: '12px', height: '12px', borderRadius: '50%', background: '#ff5f56'}}></div>
                 <div style={{width: '12px', height: '12px', borderRadius: '50%', background: '#ffbd2e'}}></div>
