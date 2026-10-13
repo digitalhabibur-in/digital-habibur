@@ -63,7 +63,24 @@ export default function Home() {
   return (
     <main style={{ overflowX: 'hidden' }}>
       <style dangerouslySetInnerHTML={{ __html: `
-        .responsive-img-box { height: 400px; padding: 0; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; display: flex; justify-content: center; align-items: center; }
+        /* 🌟 FIX: Box will naturally wrap the image, no forced height, no gaps, no zoom */
+        .responsive-img-box { 
+            height: auto; 
+            padding: 0 !important; /* Remove card padding so image touches borders */
+            border: 1px solid rgba(255,255,255,0.05); 
+            border-radius: 12px;
+            overflow: hidden; 
+            display: block; 
+            background: transparent; 
+        }
+        
+        /* 🌟 FIX: Image will take 100% width and adjust height automatically without cropping */
+        .responsive-img-box img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
         .growth-img-box { height: 500px; padding: 0; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; display: flex; justify-content: center; align-items: center; }
         .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 80px; }
         .trusted-logos { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; opacity: 0.5; align-items: center; }
@@ -91,7 +108,12 @@ export default function Home() {
         @keyframes slideUp { to { transform: translateY(0); } }
 
         @media (max-width: 768px) {
-          .responsive-img-box, .growth-img-box { height: 300px; } 
+          /* Mobile adjustments */
+          .responsive-img-box { 
+              width: 100%;
+              margin: 0 auto 30px auto; 
+          } 
+          .growth-img-box { height: 300px; }
           .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 50px; } 
           .trusted-logos { gap: 20px; } 
           .trusted-logos h3 { font-size: 1.2rem !important; } 
@@ -142,8 +164,8 @@ export default function Home() {
               <span style={{ color: '#00A859', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '2px', display: 'inline-block', marginBottom: '20px', background: 'rgba(0,168,89,0.1)', padding: '6px 12px', borderRadius: '50px' }}>
                 <i className="fa-solid fa-location-dot" style={{marginRight: '8px'}}></i> Best Web Developer in Nabadwip
               </span>
-              <h1 style={{ textAlign: 'left', fontSize: '3.2rem' }}>Digital Habibur: Custom Web & <span className="text-gradient">WordPress Solutions.</span></h1>
-              <p style={{ fontSize: '1.15rem', marginBottom: '40px', color: '#a1a1aa', maxWidth: '90%' }}>
+              <h1 style={{ fontSize: '3.2rem' }}>Digital Habibur: Custom Web & <span className="text-gradient">WordPress Solutions.</span></h1>
+              <p style={{ fontSize: '1.15rem', marginBottom: '40px', color: '#a1a1aa' }}>
                 I am Habibur Rahaman, a Full-Stack Developer specializing in high-performance WordPress sites, custom plugin development, WooCommerce, and business automation. Let&apos;s scale your brand globally.
               </p>
               
@@ -153,14 +175,13 @@ export default function Home() {
               </div>
             </div>
             
-            {/* 🌟 FIX: Added width: '100%' and overflow: 'hidden' to strictly contain the pre block */}
-            <div className="glass-card" style={{ padding: '20px', background: 'rgba(10,10,12,0.8)', width: '100%', overflow: 'hidden' }}>
+            <div className="glass-card" style={{ padding: '20px', background: 'rgba(10,10,12,0.8)', width: '100%', maxWidth: '100%', overflow: 'hidden' }}>
               <div style={{ display: 'flex', gap: '8px', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '15px', marginBottom: '15px' }}>
                 <div style={{width: '12px', height: '12px', borderRadius: '50%', background: '#ff5f56'}}></div>
                 <div style={{width: '12px', height: '12px', borderRadius: '50%', background: '#ffbd2e'}}></div>
                 <div style={{width: '12px', height: '12px', borderRadius: '50%', background: '#27c93f'}}></div>
               </div>
-              <pre style={{ color: '#a1a1aa', fontSize: '0.85rem', lineHeight: '1.6', overflowX: 'auto', paddingBottom: '10px' }}>
+              <pre style={{ color: '#a1a1aa', fontSize: '0.85rem', lineHeight: '1.6', overflowX: 'auto', paddingBottom: '10px', whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
                 <code style={{color: '#c678dd'}}>const</code> <code style={{color: '#61afef'}}>developer</code> = {'{'}<br/>
                 &nbsp;&nbsp;brand: <code style={{color: '#98c379'}}>&apos;Digital Habibur&apos;</code>,<br/>
                 &nbsp;&nbsp;expertise: [<code style={{color: '#98c379'}}>&apos;WordPress&apos;</code>, <code style={{color: '#98c379'}}>&apos;Plugins&apos;</code>, <code style={{color: '#98c379'}}>&apos;PHP&apos;</code>],<br/>
@@ -192,9 +213,11 @@ export default function Home() {
       <section id="about" className="bg-subtle">
         <div className="container">
           <div className="grid-2">
+            
             <div className="glass-card animate-fade-up responsive-img-box">
-                <img src="/about-1.webp" alt="Digital Habibur - Web Developer in Nabadwip" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center', borderRadius: '12px' }} />
+                <img src="/about-1.webp" alt="Digital Habibur - Web Developer in Nabadwip" />
             </div>
+
             <div className="animate-fade-up delay-1">
               <span className="section-subtitle" style={{ textAlign: 'left', display: 'block', marginBottom: '15px' }}>About Me</span>
               <h2 style={{ textAlign: 'left', marginBottom: '25px' }}>Top-Rated Web Developer in <span className="text-gradient">Nabadwip</span></h2>
@@ -212,7 +235,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. Services Section (Updated with Popup Modal Buttons) */}
+      {/* 4. Services Section */}
       <section id="services" className="bg-dark">
         <div className="container">
           <span className="section-subtitle" style={{ display: 'block', textAlign: 'center' }}>What I Do</span>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 export default function Navbar() {
@@ -9,6 +9,20 @@ export default function Navbar() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+
+  // 🌟 FIX: Prevent Background Scrolling when Menu or Modal is open
+  useEffect(() => {
+    if (isMobileMenuOpen || isModalOpen) {
+      document.body.style.overflow = 'hidden'; // Lock background scroll
+    } else {
+      document.body.style.overflow = ''; // Restore background scroll
+    }
+    
+    // Cleanup function when component unmounts
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen, isModalOpen]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -55,26 +69,29 @@ export default function Navbar() {
         }
         .sidebar-overlay.active { opacity: 1; visibility: visible; }
         
+        /* 🌟 FIX: Full-screen centered menu */
         .sidebar-menu {
-            position: fixed; top: 0; right: -100%; width: 100%; max-width: 320px; height: 100dvh;
-            background: #0a0a0c; border-left: 1px solid rgba(0,168,89,0.2);
-            z-index: 1000; padding: 30px 20px; display: flex; flex-direction: column;
+            position: fixed; top: 0; right: -100%; 
+            width: 100%; max-width: 100%; /* 100% width instead of 320px */
+            height: 100dvh;
+            background: #0a0a0c; 
+            z-index: 1000; padding: 60px 20px; 
+            display: flex; flex-direction: column; align-items: center; /* Centered completely */
             transition: 0.4s cubic-bezier(0.8, 0, 0.2, 1);
-            box-shadow: -10px 0 40px rgba(0,0,0,0.8);
             overflow-y: auto;
         }
         .sidebar-menu.active { right: 0; }
         
         .sidebar-link {
-            color: #a1a1aa; font-size: 1.2rem; font-weight: 600; padding: 10px 0;
+            color: #a1a1aa; font-size: 1.3rem; font-weight: 600; padding: 12px 0;
             display: block; text-align: center; transition: 0.3s;
         }
         .sidebar-link:hover { color: #00A859; transform: scale(1.05); }
 
         .social-circle {
-            width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05);
+            width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.05);
             display: flex; justify-content: center; align-items: center; color: #e4e4e7;
-            font-size: 1.1rem; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1);
+            font-size: 1.2rem; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1);
         }
         .social-circle:hover { background: rgba(0,168,89,0.1); color: #00A859; border-color: #00A859; transform: translateY(-3px); }
 
@@ -84,7 +101,6 @@ export default function Navbar() {
         }
       `}} />
 
-      {/* 🌟 FIX: ইনলাইন 'position: relative' মুছে দেওয়া হয়েছে যাতে গ্লোবাল CSS এর 'position: fixed' কাজ করে */}
       <nav>
         <div className="container nav-container">
           <div className="logo">
@@ -114,22 +130,23 @@ export default function Navbar() {
       {/* Mobile Sidebar Overlay */}
       <div className={`sidebar-overlay ${isMobileMenuOpen ? 'active' : ''}`} onClick={() => setIsMobileMenuOpen(false)}></div>
       
-      {/* Mobile Slide-out Menu */}
+      {/* Mobile Slide-out Menu (Now Full Screen) */}
       <div className={`sidebar-menu ${isMobileMenuOpen ? 'active' : ''}`}>
         
-        <button onClick={() => setIsMobileMenuOpen(false)} style={{ position: 'absolute', top: '15px', right: '20px', background: 'none', border: 'none', color: '#a1a1aa', fontSize: '1.8rem', cursor: 'pointer' }}>
+        <button onClick={() => setIsMobileMenuOpen(false)} style={{ position: 'absolute', top: '20px', right: '25px', background: 'none', border: 'none', color: '#a1a1aa', fontSize: '2rem', cursor: 'pointer' }}>
           <i className="fa-solid fa-xmark"></i>
         </button>
 
-        <div style={{ textAlign: 'center', marginBottom: '25px', marginTop: '10px' }}>
-          <div style={{ width: '85px', height: '85px', borderRadius: '50%', border: '2px solid #00A859', padding: '3px', margin: '0 auto 15px', overflow: 'hidden' }}>
+        <div style={{ textAlign: 'center', marginBottom: '30px', marginTop: '20px' }}>
+          <div style={{ width: '100px', height: '100px', borderRadius: '50%', border: '2px solid #00A859', padding: '3px', margin: '0 auto 15px', overflow: 'hidden' }}>
             <img src="/about-1.webp" alt="Habibur Rahaman" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
           </div>
-          <h3 style={{ color: '#fff', fontSize: '1.25rem', marginBottom: '5px' }}>Habibur Rahaman</h3>
-          <p style={{ color: '#00A859', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', margin: 0 }}>Web Developer</p>
+          <h3 style={{ color: '#fff', fontSize: '1.4rem', marginBottom: '5px' }}>Habibur Rahaman</h3>
+          <p style={{ color: '#00A859', fontSize: '0.9rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', margin: 0 }}>Web Developer</p>
         </div>
 
-        <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '5px', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)', padding: '20px 0', margin: '0 20px' }}>
+        {/* Links perfectly centered */}
+        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '5px', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)', padding: '25px 0', margin: '0' }}>
           <Link href="/" className="sidebar-link" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
           <Link href="/about" className="sidebar-link" onClick={() => setIsMobileMenuOpen(false)}>About</Link>
           <Link href="/services" className="sidebar-link" onClick={() => setIsMobileMenuOpen(false)}>Services</Link>
@@ -137,24 +154,24 @@ export default function Navbar() {
           <Link href="/contact" className="sidebar-link" onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
         </div>
 
-        <div style={{ marginTop: '25px', textAlign: 'center' }}>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', marginBottom: '20px' }}>
+        <div style={{ marginTop: '30px', textAlign: 'center', width: '100%', maxWidth: '300px' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '25px' }}>
             <a href="https://wa.me/919332361219" target="_blank" className="social-circle"><i className="fa-brands fa-whatsapp"></i></a>
             <a href="#" className="social-circle"><i className="fa-brands fa-linkedin-in"></i></a>
             <a href="#" className="social-circle"><i className="fa-brands fa-github"></i></a>
           </div>
 
-          <p style={{ color: '#a1a1aa', fontSize: '0.85rem', marginBottom: '5px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+          <p style={{ color: '#a1a1aa', fontSize: '0.95rem', marginBottom: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
             <i className="fa-solid fa-envelope text-green"></i> info@digitalhabibur.in
           </p>
-          <p style={{ color: '#a1a1aa', fontSize: '0.85rem', marginBottom: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+          <p style={{ color: '#a1a1aa', fontSize: '0.95rem', marginBottom: '25px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
             <i className="fa-solid fa-phone text-green"></i> +91 9332361219
           </p>
           
           <button 
             onClick={() => { setIsModalOpen(true); setIsMobileMenuOpen(false); }} 
             className="btn" 
-            style={{ width: '100%', padding: '14px', fontSize: '1rem', justifyContent: 'center', borderRadius: '8px' }}
+            style={{ width: '100%', padding: '16px', fontSize: '1.05rem', justifyContent: 'center', borderRadius: '8px' }}
           >
             Hire Me <i className="fa-solid fa-arrow-right" style={{ marginLeft: '8px' }}></i>
           </button>
