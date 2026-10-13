@@ -58,12 +58,32 @@ export default function Navbar() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: `
-        .mobile-menu-btn { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; transition: 0.3s; z-index: 1001; }
+        .mobile-menu-btn { 
+            display: none; 
+            background: rgba(0, 168, 89, 0.1); 
+            border: 1px solid rgba(0, 168, 89, 0.4); 
+            border-radius: 8px;
+            color: #fff; 
+            font-size: 1.3rem; 
+            width: 45px;
+            height: 45px;
+            cursor: pointer; 
+            transition: 0.3s; 
+            z-index: 10002; 
+            position: relative;
+            align-items: center;
+            justify-content: center;
+            pointer-events: auto !important;
+        }
+        .mobile-menu-btn:hover {
+            border-color: #00A859;
+            background: rgba(0, 168, 89, 0.2);
+        }
         
         .sidebar-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100dvh;
-            background: rgba(0,0,0,0.8); backdrop-filter: blur(8px);
-            z-index: 999; opacity: 0; visibility: hidden; transition: 0.3s ease;
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+            z-index: 9999; opacity: 0; visibility: hidden; transition: 0.3s ease;
         }
         .sidebar-overlay.active { opacity: 1; visibility: visible; }
         
@@ -72,7 +92,7 @@ export default function Navbar() {
             width: 100%; max-width: 100%; 
             height: 100dvh;
             background: #0a0a0c; 
-            z-index: 1000; padding: 60px 20px; 
+            z-index: 10000; padding: 60px 20px; 
             display: flex; flex-direction: column; align-items: center; 
             transition: 0.4s cubic-bezier(0.8, 0, 0.2, 1);
             overflow-y: auto;
@@ -93,18 +113,17 @@ export default function Navbar() {
         .social-circle:hover { background: rgba(0,168,89,0.1); color: #00A859; border-color: #00A859; transform: translateY(-3px); }
 
         @media (max-width: 768px) {
-          .mobile-menu-btn { display: block; }
+          .mobile-menu-btn { display: flex !important; }
           .nav-links { display: none !important; }
         }
       `}} />
 
       <nav>
-        <div className="container nav-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className="container nav-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 100 }}>
           
           <div className="logo" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}>
               
-              {/* 🌟 FIX: Updated SVG Logo (React CamelCase format) */}
               <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: 'drop-shadow(0 0 10px rgba(0, 168, 89, 0.4))' }}>
                 <defs>
                   <linearGradient id="neonGradient" x1="0%" y1="100%" x2="100%" y2="0%">
@@ -129,7 +148,13 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <button className="mobile-menu-btn" onClick={() => setIsMobileMenuOpen(true)}>
+          {/* 🌟 FIX: Fully Interactive Hamburger Button with Flex and High Z-Index */}
+          <button 
+            type="button" 
+            className="mobile-menu-btn" 
+            onClick={() => setIsMobileMenuOpen(true)}
+            aria-label="Open Mobile Menu"
+          >
             <i className="fa-solid fa-bars"></i>
           </button>
 
@@ -148,12 +173,17 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Sidebar Overlay */}
-      <div className={`sidebar-overlay \${isMobileMenuOpen ? 'active' : ''}`} onClick={() => setIsMobileMenuOpen(false)}></div>
+      <div className={`sidebar-overlay ${isMobileMenuOpen ? 'active' : ''}`} onClick={() => setIsMobileMenuOpen(false)}></div>
       
       {/* Mobile Slide-out Menu (Full Screen) */}
-      <div className={`sidebar-menu \${isMobileMenuOpen ? 'active' : ''}`}>
+      <div className={`sidebar-menu ${isMobileMenuOpen ? 'active' : ''}`}>
         
-        <button onClick={() => setIsMobileMenuOpen(false)} style={{ position: 'absolute', top: '20px', right: '25px', background: 'none', border: 'none', color: '#a1a1aa', fontSize: '2rem', cursor: 'pointer' }}>
+        <button 
+          type="button"
+          onClick={() => setIsMobileMenuOpen(false)} 
+          style={{ position: 'absolute', top: '20px', right: '25px', background: 'none', border: 'none', color: '#a1a1aa', fontSize: '2rem', cursor: 'pointer', zIndex: 10003 }}
+          aria-label="Close Mobile Menu"
+        >
           <i className="fa-solid fa-xmark"></i>
         </button>
 
@@ -190,6 +220,7 @@ export default function Navbar() {
           </p>
           
           <button 
+            type="button"
             onClick={() => { setIsModalOpen(true); setIsMobileMenuOpen(false); }} 
             className="btn" 
             style={{ width: '100%', padding: '16px', fontSize: '1.05rem', justifyContent: 'center', borderRadius: '8px' }}
@@ -203,7 +234,7 @@ export default function Navbar() {
       {isModalOpen && (
         <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="close-btn" onClick={() => setIsModalOpen(false)}>
+            <button type="button" className="close-btn" onClick={() => setIsModalOpen(false)}>
               <i className="fa-solid fa-xmark"></i>
             </button>
             
