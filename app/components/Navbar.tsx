@@ -243,6 +243,7 @@ export default function Navbar() {
             
             <form className="contact-form" onSubmit={handleSubmit}>
               <input type="text" name="name" placeholder="Your Name or Company" required style={{ padding: '12px', marginBottom: '15px' }} />
+              <input type="tel" name="phone" placeholder="Phone No" required style={{ padding: '12px', marginBottom: '15px' }} />
               <input type="email" name="email" placeholder="Email Address" required style={{ padding: '12px', marginBottom: '15px' }} />
               <input type="text" name="service" placeholder="Service Needed" required style={{ padding: '12px', marginBottom: '15px' }} />
               <textarea name="message" rows={4} placeholder="Project Details..." required style={{ padding: '12px', marginBottom: '15px' }}></textarea>
