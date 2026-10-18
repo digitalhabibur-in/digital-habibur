@@ -107,6 +107,7 @@ export default function ContactPage() {
               
               <form className="contact-form" onSubmit={handleSubmit}>
                 <input type="text" name="name" placeholder="Your Name or Company" required />
+                <input type="tel" name="phone" placeholder="Phone No" required />
                 <input type="email" name="email" placeholder="Email Address" required />
                 <input type="text" name="service" placeholder="Service Needed (e.g. CRM, WordPress)" required />
                 <textarea name="message" rows={5} placeholder="Tell me about your project or bottleneck..." required></textarea>
