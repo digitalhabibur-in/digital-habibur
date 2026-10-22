@@ -489,7 +489,7 @@ export default function UltimateSpecialOffer() {
               অফারটি লুফে নিন <i className="fa-solid fa-arrow-right"></i>
             </button>
             <p style={{ marginTop: '14px', color: '#ef4444', fontSize: '0.9rem', fontWeight: 500 }}>
-              ⚠️ ১০ জনের মধ্যে ৩টি স্লট বুক হয়ে গেছে!
+              ⚠️ ১০ জনের মধ্যে ৬টি স্লট বুক হয়ে গেছে!
             </p>
           </div>
 
