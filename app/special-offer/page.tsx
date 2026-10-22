@@ -24,17 +24,45 @@ export default function UltimateSpecialOffer() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   
-  // Countdown Timer State (7 Days)
-  const [timeLeft, setTimeLeft] = useState(7 * 24 * 60 * 60);
+  // Countdown Timer State (in seconds)
+  const [timeLeft, setTimeLeft] = useState<number>(10 * 60);
 
   useEffect(() => {
     // Hide global layout scroll
     document.body.style.overflow = 'hidden';
-    
-    // Timer countdown logic
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
-    }, 1000);
+
+    // Target Date: October 23, 2026 at 23:59:59 IST
+    const targetTimestamp = new Date('2026-10-23T23:59:59+05:30').getTime();
+    const STORAGE_KEY = 'dh_evergreen_10min_deadline';
+
+    const updateCountdown = () => {
+      const now = Date.now();
+
+      if (now < targetTimestamp) {
+        // Before Oct 23, 11:59:59 PM -> Show real countdown to Oct 23 deadline
+        const remainingSeconds = Math.floor((targetTimestamp - now) / 1000);
+        setTimeLeft(remainingSeconds);
+      } else {
+        // From Oct 24 onwards -> Show 10-minute countdown for every visitor
+        let userDeadline = sessionStorage.getItem(STORAGE_KEY);
+        let deadlineTime = userDeadline ? parseInt(userDeadline, 10) : 0;
+
+        // If new visitor or timer expired, set a fresh 10-minute deadline
+        if (!deadlineTime || now >= deadlineTime) {
+          deadlineTime = now + 10 * 60 * 1000; // 10 minutes in milliseconds
+          sessionStorage.setItem(STORAGE_KEY, deadlineTime.toString());
+        }
+
+        const remainingSeconds = Math.max(0, Math.floor((deadlineTime - now) / 1000));
+        setTimeLeft(remainingSeconds);
+      }
+    };
+
+    // Run immediately on load so there is no delay
+    updateCountdown();
+
+    // Update every second
+    const timer = setInterval(updateCountdown, 1000);
 
     return () => {
       document.body.style.overflow = 'auto';
