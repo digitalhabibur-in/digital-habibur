@@ -36,8 +36,6 @@ export default function FreeGuideLandingPage() {
   const validateInputs = () => {
     const cleanPhone = phone.replace(/\D/g, '').slice(-10);
     const phoneRegex = /^[6-9]\d{9}$/;
-    
-    // Check for repetitive fake numbers like 9999999999 or 9876543210
     const isRepetitive = /^(\d)\1{9}$/.test(cleanPhone) || cleanPhone === '9876543210';
 
     if (name.trim().length < 3) {
@@ -62,7 +60,7 @@ export default function FreeGuideLandingPage() {
 
   const triggerPdfDownload = () => {
     const link = document.createElement('a');
-    link.href = '/website-guide.pdf'; // Must match file name in public/ folder
+    link.href = '/website-guide.pdf'; // public ফোল্ডারে থাকা পিডিএফের নাম
     link.download = 'Chhoto_Byabsar_Website_Guide_Digital_Habibur.pdf';
     document.body.appendChild(link);
     link.click();
@@ -138,10 +136,10 @@ export default function FreeGuideLandingPage() {
         .main-wrapper {
           max-width: 1180px;
           margin: 0 auto;
-          padding: 50px 20px 80px;
+          padding: 45px 20px 80px;
         }
         @media (max-width: 768px) {
-          .main-wrapper { padding: 30px 16px 60px; }
+          .main-wrapper { padding: 25px 16px 60px; }
         }
 
         .hero-grid {
@@ -154,40 +152,47 @@ export default function FreeGuideLandingPage() {
           .hero-grid { grid-template-columns: 1fr; gap: 35px; }
         }
 
-        /* 3D Book Mockup Card */
-        .book-showcase {
-          background: linear-gradient(145deg, rgba(0, 168, 89, 0.12) 0%, rgba(15, 23, 42, 0.6) 100%);
-          border: 1px solid rgba(0, 168, 89, 0.25);
+        /* Custom Mockup Showcase Card */
+        .mockup-showcase {
+          background: radial-gradient(circle at center, rgba(0, 168, 89, 0.16) 0%, rgba(20, 20, 20, 0.7) 80%);
+          border: 1px solid rgba(0, 168, 89, 0.28);
           border-radius: 22px;
-          padding: 26px;
+          padding: 24px;
           margin-bottom: 28px;
           display: flex;
           gap: 24px;
           align-items: center;
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
         }
-        @media (max-width: 550px) {
-          .book-showcase { flex-direction: column; text-align: center; padding: 22px 18px; }
+        @media (max-width: 600px) {
+          .mockup-showcase { flex-direction: column; text-align: center; padding: 20px 16px; }
         }
 
-        .book-cover-3d {
-          width: 135px;
-          min-width: 135px;
-          height: 190px;
-          background: linear-gradient(145deg, #071318 0%, #004D29 100%);
-          border: 2px solid #00A859;
-          border-left: 7px solid #006837;
-          border-radius: 6px 14px 14px 6px;
-          padding: 14px 12px;
+        .mockup-img-wrap {
+          width: 180px;
+          min-width: 180px;
           display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          box-shadow: 12px 15px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 168, 89, 0.2);
-          transform: perspective(600px) rotateY(-8deg);
+          justify-content: center;
+          align-items: center;
+        }
+        @media (max-width: 600px) {
+          .mockup-img-wrap { width: 210px; min-width: auto; margin-bottom: 6px; }
+        }
+
+        .mockup-img {
+          width: 100%;
+          height: auto;
+          object-fit: contain;
+          filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.65));
+          transition: transform 0.4s ease;
+        }
+        .mockup-img:hover {
+          transform: scale(1.04) translateY(-4px);
         }
 
         /* Form Card */
         .form-card {
-          background: rgba(20, 20, 20, 0.85);
+          background: rgba(20, 20, 20, 0.88);
           backdrop-filter: blur(16px);
           border: 1px solid rgba(0, 168, 89, 0.35);
           border-radius: 24px;
@@ -197,7 +202,7 @@ export default function FreeGuideLandingPage() {
           top: 30px;
         }
         @media (max-width: 600px) {
-          .form-card { padding: 26px 20px; border-radius: 20px; }
+          .form-card { padding: 26px 20px; border-radius: 20px; position: static; }
         }
 
         .input-group { margin-bottom: 16px; text-align: left; }
@@ -263,52 +268,48 @@ export default function FreeGuideLandingPage() {
 
       {/* Top Banner */}
       <div style={{ background: 'rgba(0, 168, 89, 0.15)', borderBottom: '1px solid rgba(0, 168, 89, 0.3)', padding: '10px 16px', textAlign: 'center', fontSize: '0.9rem', color: '#a7f3d0' }}>
-        📘 <strong>১০০% ফ্রি বিজনেস গাইড:</strong> ছোট ও মাঝারি ব্যবসার মালিকদের জন্য ২৮ পৃষ্ঠার বাস্তবভিত্তিক ই-বুক!
+        📘 <strong>১০০% ফ্রি বিজনেস গাইড:</strong> ছোট ও মাঝারি ব্যবসার মালিকদের জন্য বাস্তবভিত্তিক ই-বুক!
       </div>
 
       <div className="main-wrapper">
         <div className="hero-grid">
           
-          {/* LEFT COLUMN: E-Book Details & Value */}
+          {/* LEFT COLUMN: E-Book Details & Your Custom Mockup */}
           <div>
             <span className="heading-font" style={{ display: 'inline-block', background: 'rgba(255, 215, 0, 0.12)', color: '#FFD700', padding: '6px 16px', borderRadius: '50px', fontSize: '0.88rem', marginBottom: '16px', border: '1px solid rgba(255, 215, 0, 0.3)', fontWeight: 600 }}>
               ✦ ফ্রি পিডিএফ গাইড (মূল্য ₹২৯৯ - আজ সম্পূর্ণ ফ্রি!)
             </span>
 
-            <h1 className="heading-font" style={{ fontSize: 'clamp(2rem, 4.5vw, 3.2rem)', fontWeight: 700, lineHeight: 1.25, marginBottom: '18px', color: '#ffffff' }}>
+            <h1 className="heading-font" style={{ fontSize: 'clamp(2rem, 4.5vw, 3.1rem)', fontWeight: 700, lineHeight: 1.25, marginBottom: '16px', color: '#ffffff' }}>
               প্রতিদিন কাস্টমার হারাচ্ছেন? <br />
               <span className="gradient-text">জেনে নিন ওয়েবসাইটের সঠিক কৌশল!</span>
             </h1>
 
-            <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#9ca3af', marginBottom: '26px' }}>
+            <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#9ca3af', marginBottom: '24px' }}>
               ওয়েবসাইট কেন দরকার, কীভাবে কাজে লাগবে, ডেভেলপারকে কাজ দেওয়ার আগে কী কী প্রস্তুতি নেবেন এবং কীভাবে হাজার হাজার টাকার ভুল খরচ এড়াবেন—সবকিছু সহজ বাংলায় এই গাইডে সাজানো হয়েছে।
             </p>
 
-            {/* 3D Book Visual Box */}
-            <div className="book-showcase">
-              <div className="book-cover-3d">
-                <div>
-                  <span style={{ fontSize: '0.55rem', background: '#F59E0B', color: '#000', padding: '2px 6px', borderRadius: '10px', fontWeight: 700 }}>শিক্ষামূলক গাইড</span>
-                  <div className="heading-font" style={{ fontSize: '0.85rem', fontWeight: 700, color: '#fff', marginTop: '8px', lineHeight: 1.25 }}>
-                    প্রতিদিন কাস্টমার হারাচ্ছেন?
-                  </div>
-                  <div style={{ fontSize: '0.65rem', color: '#00ffd5', marginTop: '4px' }}>
-                    ছোট ব্যবসার ওয়েবসাইট গাইড
-                  </div>
-                </div>
-                <div style={{ borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: '6px', fontSize: '0.6rem', color: '#d1fae5' }}>
-                  ডিজিটাল হাবিবুর
-                </div>
+            {/* YOUR CUSTOM MOCKUP IMAGE BOX */}
+            <div className="mockup-showcase">
+              <div className="mockup-img-wrap">
+                <img 
+                  src="/ebook-mockup.png" 
+                  alt="ছোট ব্যবসার ওয়েবসাইট গাইড মকআপ" 
+                  className="mockup-img"
+                />
               </div>
 
               <div>
-                <h3 className="heading-font" style={{ fontSize: '1.3rem', color: '#fff', marginBottom: '8px' }}>
+                <span style={{ background: 'rgba(0, 168, 89, 0.2)', color: '#00ffd5', padding: '3px 10px', borderRadius: '6px', fontSize: '0.78rem', fontWeight: 600 }}>
+                  ডিজিটাল হাবিবুর স্পেশাল ই-বুক
+                </span>
+                <h3 className="heading-font" style={{ fontSize: '1.35rem', color: '#fff', margin: '8px 0' }}>
                   ছোট ব্যবসার ওয়েবসাইট গাইড (PDF)
                 </h3>
-                <p style={{ fontSize: '0.92rem', color: '#9ca3af', marginBottom: '12px', lineHeight: 1.6 }}>
-                  যেকোনো স্মার্টফোন বা কম্পিউটারে পড়ার উপযোগী এবং প্রিন্ট-রেডি চেকলিস্ট সংবলিত।
+                <p style={{ fontSize: '0.92rem', color: '#9ca3af', marginBottom: '14px', lineHeight: 1.6 }}>
+                  যেকোনো স্মার্টফোন বা কম্পিউটারে পড়ার উপযোগী এবং প্রিন্ট-রেডি অডিট চেকলিস্ট সংবলিত।
                 </p>
-                <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap', fontSize: '0.85rem', color: '#00A859', fontWeight: 600 }}>
+                <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', fontSize: '0.85rem', color: '#00A859', fontWeight: 600, justifyContent: 'inherit' }}>
                   <span>✔ ১২টি পূর্ণাঙ্গ অধ্যায়</span>
                   <span>✔ অডিট চেকলিস্ট</span>
                   <span>✔ বাজেট ওয়ার্কশিট</span>
@@ -464,4 +465,4 @@ export default function FreeGuideLandingPage() {
       </div>
     </div>
   );
-        }
+}
